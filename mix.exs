@@ -7,6 +7,9 @@ defmodule ExSync.Mixfile do
       elixir: "~> 1.0",
       elixirc_paths: ["lib", "web"],
       deps: deps,
+      description: "Yet another Elixir reloader.",
+      source_url: "https://github.com/falood/exsync",
+      package: package,
     ]
   end
 
@@ -17,6 +20,12 @@ defmodule ExSync.Mixfile do
   end
 
   defp deps do
-    [ {:exfswatch, github: "falood/exfswatch"} ]
+    [ {:exfswatch, "~> 0.0.1"} ]
+  end
+
+  defp package do
+    %{ licenses: ["BSD 3-Clause"],
+       links: %{"Github" => "https://github.com/falood/exsync"}
+     }
   end
 end
