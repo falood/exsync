@@ -3,6 +3,18 @@ ExSync
 
 Yet another Elixir reloader.
 
+## System Support
+
+ExSync deps on [ExFSwatch](https://github.com/falood/exfswatch) and ExFSWatch deps on [fs](https://github.com/synrc/fs#backends)
+
+So just like [fs](https://github.com/synrc/fs#backends)
+
+- Mac fsevent
+- Linux inotify
+- Windows inotify-win (untested)
+
+NOTE: On Linux you need to install inotify-tools.
+
 ## Usage
 
 1. Create a new application
