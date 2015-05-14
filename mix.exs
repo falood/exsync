@@ -3,7 +3,7 @@ defmodule ExSync.Mixfile do
 
   def project do
     [ app: :exsync,
-      version: "0.0.1",
+      version: "0.0.2",
       elixir: "~> 1.0",
       elixirc_paths: ["lib", "web"],
       deps: deps,
@@ -20,7 +20,7 @@ defmodule ExSync.Mixfile do
   end
 
   defp deps do
-    [ {:exfswatch, "~> 0.0.1"} ]
+    [ {:exfswatch, "~> 0.0.2"} ]
   end
 
   defp package do

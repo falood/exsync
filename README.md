@@ -12,7 +12,7 @@ Yet another Elixir reloader.
 2. Add exsync to your `mix.exs` dependencies:
 
         def deps do
-          [ {:exsync, github: "~> 0.0.1", only: :dev} ]
+          [ {:exsync, github: "~> 0.0.2", only: :dev} ]
         end
 
 3. List `:exsync` as your application dependencies:
