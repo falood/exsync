@@ -7,9 +7,9 @@ defmodule ExSync.BeamMonitor do
 
   def callback(file_path, events) do
     if (Path.extname file_path) in [".beam"] do
-      { "Created" in events,
-        "Removed" in events,
-        "Updated" in events,
+      { :created  in events,
+        :removed  in events,
+        :modified in events,
         file_path |> File.exists?,
       }
    |> case do
