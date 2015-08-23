@@ -3,7 +3,7 @@ defmodule ExSync.Mixfile do
 
   def project do
     [ app: :exsync,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.0",
       elixirc_paths: ["lib", "web"],
       deps: deps,
