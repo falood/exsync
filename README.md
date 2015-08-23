@@ -37,7 +37,7 @@ NOTE: On Linux you need to install inotify-tools.
 
 1. Create an umbrella project
 
-        mix new my\_umbrella\_app --umbrella
+        mix new my_umbrella_app --umbrella
 
 2. Add exsync to your `mix.exs` dependencies:
 
