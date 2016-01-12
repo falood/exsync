@@ -6,7 +6,7 @@ defmodule ExSync.SrcMonitor do
   end
 
   def callback(file_path, _events) do
-    if (Path.extname file_path) in [".erl", ".hrl", ".ex"] do
+    if (Path.extname file_path) in ExSync.Config.src_extensions do
       ExSync.Utils.recomplete
     end
   end
