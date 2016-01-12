@@ -28,7 +28,7 @@ defmodule ExSync.Config do
   end
 
   def src_extensions do
-    Mix.Project.config[:exsync_src_extensions] || [".erl", ".hrl", ".ex"]
+    Application.get_env(:exsync, :extensions, [".erl", ".hrl", ".ex"])
   end
 
   def application do
