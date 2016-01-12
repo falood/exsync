@@ -27,6 +27,10 @@ defmodule ExSync.Config do
     end |> List.flatten
   end
 
+  def src_extensions do
+    Mix.Project.config[:exsync_src_extensions] || [".erl", ".hrl", ".ex"]
+  end
+
   def application do
     :exsync
   end
