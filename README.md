@@ -27,11 +27,9 @@ NOTE: On Linux you need to install inotify-tools.
           [ {:exsync, "~> 0.1", only: :dev} ]
         end
 
-3. List `:exsync` as your application dependencies:
+3. Start your application the usual way, e.g., `iex -S mix`, then:
 
-        def application do
-          [ applications: [:exsync] ]
-        end
+        ExSync.start()
 
 ## Usage for umbrella project
 
