@@ -10,4 +10,8 @@ defmodule ExSync do
     end
     {:ok, self}
   end
+
+  def start() do
+    Application.ensure_all_started(:exsync)
+  end
 end
