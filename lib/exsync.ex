@@ -8,7 +8,7 @@ defmodule ExSync do
       _ ->
         IO.write :stderr, "ExSync NOT stared. Only :dev environment is supported.\n"
     end
-    {:ok, self}
+    {:ok, self()}
   end
 
   def start() do
