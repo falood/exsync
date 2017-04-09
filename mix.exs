@@ -3,13 +3,17 @@ defmodule ExSync.Mixfile do
 
   def project do
     [ app: :exsync,
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.0",
       elixirc_paths: ["lib", "web"],
       deps: deps(),
       description: "Yet another Elixir reloader.",
       source_url: "https://github.com/falood/exsync",
       package: package(),
+      docs: [
+        extras: ["README.md"],
+        main: "readme",
+      ]
     ]
   end
 
@@ -20,11 +24,14 @@ defmodule ExSync.Mixfile do
   end
 
   defp deps do
-    [ {:exfswatch, "~> 0.3"} ]
+    [ { :ex_doc, "~> 0.14", only: :docs },
+      { :exfswatch, "~> 0.4" },
+    ]
   end
 
   defp package do
-    %{ licenses: ["BSD 3-Clause"],
+    %{ maintainers: ["Xiangrong Hao"],
+       licenses: ["BSD 3-Clause"],
        links: %{"Github" => "https://github.com/falood/exsync"}
      }
   end
