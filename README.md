@@ -30,6 +30,25 @@ NOTE: On Linux you need to install inotify-tools.
 3. Start your application the usual way, e.g., `iex -S mix`, then:
 
         ExSync.start()
+        
+4. (Alternative) Always start ExSync when available, add the following to an application's `start/2`:
+
+        defmodule MyApp do
+          use Application
+
+          def start(_type, _args) do
+            import Supervisor.Spec, warn: false
+
+            case Code.ensure_loaded(ExSync) do
+              {:module, ExSync} ->
+                ExSync.start()
+              {:error, :nofile} ->
+                :ok
+            end
+
+            # ... rest of your applications start script.
+          end
+        end
 
 ## Usage for umbrella project
 
