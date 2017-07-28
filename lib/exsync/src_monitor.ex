@@ -1,13 +1,26 @@
-defmodule ExSync.SrcMonitor do
-  use ExFSWatch, dirs: ExSync.Config.src_dirs
+require Logger
 
-  def callback(:stop) do
-    IO.puts "STOP"
+defmodule ExSync.SrcMonitor do
+
+  def start_link do
+    GenServer.start_link(__MODULE__, [])
   end
 
-  def callback(file_path, _events) do
-    if (Path.extname file_path) in ExSync.Config.src_extensions do
+  def init([]) do
+    {:ok, watcher_pid} = FileSystem.start_link(dirs: ExSync.Config.src_dirs)
+    FileSystem.subscribe(watcher_pid)
+    {:ok, %{watcher_pid: watcher_pid}}
+  end
+
+  def handle_info({:file_event, watcher_pid, {path, _events}}, %{watcher_pid: watcher_pid}=state) do
+    if Path.extname(path) in ExSync.Config.src_extensions do
       ExSync.Utils.recomplete
     end
+    {:noreply, state}
+  end
+
+  def handle_info({:file_event, watcher_pid, :stop}, %{watcher_pid: watcher_pid}=state) do
+    Logger.info "ExSync src monitor stopped."
+    {:noreply, state}
   end
 end

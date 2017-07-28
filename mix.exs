@@ -3,8 +3,8 @@ defmodule ExSync.Mixfile do
 
   def project do
     [ app: :exsync,
-      version: "0.1.4",
-      elixir: "~> 1.0",
+      version: "0.2.0",
+      elixir: "~> 1.3",
       elixirc_paths: ["lib", "web"],
       deps: deps(),
       description: "Yet another Elixir reloader.",
@@ -19,13 +19,13 @@ defmodule ExSync.Mixfile do
 
   def application do
     [ mod: { ExSync, [] },
-      applications: [:exfswatch, :logger],
+      applications: [:logger],
     ]
   end
 
   defp deps do
     [ { :ex_doc, "~> 0.14", only: :docs },
-      { :exfswatch, "~> 0.4" },
+      { :file_system, "~> 0.1.3" },
     ]
   end
 
