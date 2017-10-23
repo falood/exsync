@@ -21,7 +21,17 @@ defmodule ExSync.SrcMonitor do
         %{watcher_pid: watcher_pid} = state
       ) do
     if Path.extname(path) in ExSync.Config.src_extensions() do
-      ExSync.Utils.recomplete()
+      # This may also vary based on editor - when saving a file in neovim on linux,
+      # events received ar3e:
+      #   :modified
+      #   :modified, :closed
+      #   :attribute
+      # Rather than coding specific behaviors for each OS, look for the modified event in
+      # isolation to trigger things.
+      # TODO: untested assumption that this behavior is common across Mac/Linux/Win
+      if [:modified] == events do
+        ExSync.Utils.recomplete()
+      end
     end
 
     {:noreply, state}
