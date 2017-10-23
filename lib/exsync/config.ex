@@ -1,3 +1,5 @@
+require Logger
+
 defmodule ExSync.Config do
   def beam_dirs do
     if Mix.Project.umbrella? do
@@ -11,6 +13,19 @@ defmodule ExSync.Config do
     else
       [Mix.Project.compile_path]
     end |> List.flatten
+  end
+
+  def src_monitor_enabled do
+    case Application.fetch_env(application(), :src_monitor) do
+      :error ->
+        Logger.debug("Defaulting to enable source monitor, set config :exsync, src_monitor: false to disable")
+        true
+      {:ok, value} when value in [true, false] ->
+        value
+      {:ok, invalid} ->
+        Logger.error("Value #{inspect invalid} not valid for setting :src_monitor, expected true or false.  Enabling source monitor.")
+        true
+    end
   end
 
   def src_dirs do
