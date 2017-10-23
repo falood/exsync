@@ -14,9 +14,13 @@ defmodule ExSync.Config do
   end
 
   def src_dirs do
+    src_default_dirs() ++ src_addition_dirs()
+  end
+
+  defp src_default_dirs do
     if Mix.Project.umbrella? do
       for %Mix.Dep{app: app, opts: opts} <- Mix.Dep.Umbrella.loaded do
-        Mix.Project.in_project(app, opts[:path], fn _ -> src_dirs() end)
+        Mix.Project.in_project(app, opts[:path], fn _ -> src_default_dirs() end)
       end
     else
       Mix.Project.config
@@ -26,6 +30,12 @@ defmodule ExSync.Config do
    |> Enum.map(&Path.join app_source_dir(), &1)
    |> Enum.filter(&File.exists?/1)
     end |> List.flatten
+  end
+
+  defp src_addition_dirs do
+    Application.get_env(:exsync, :addition_dirs, [])
+    |> Enum.map(&Path.join(app_source_dir(), &1))
+    |> Enum.filter(&File.exists?/1)
   end
 
   def src_extensions do
