@@ -59,6 +59,11 @@ ExSync deps on [FileSystem](https://github.com/falood/file_system)
         iex -S mix exsync
 
 ## Config
+
 1. add your own dirs to monitor, if you want monitor `priv` dir, use such config:
 
         config :exsync, :addition_dirs, ["/priv"]
+
+2. add your own extensions
+
+        config :exsync, :extensions, [".erl", ".hrl", ".ex", ".tpl"]

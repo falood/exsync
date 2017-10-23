@@ -39,7 +39,7 @@ defmodule ExSync.Config do
   end
 
   def src_extensions do
-    Application.get_env(:exsync, :extensions, [".erl", ".hrl", ".ex"])
+    Application.get_env(:exsync, :extensions, [".erl", ".hrl", ".ex", ".eex"])
   end
 
   def application do
