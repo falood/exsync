@@ -32,8 +32,8 @@ ExSync deps on [FileSystem](https://github.com/falood/file_system)
             import Supervisor.Spec, warn: false
 
             case Code.ensure_loaded(ExSync) do
-              {:module, ExSync} ->
-                ExSync.start()
+              {:module, ExSync = mod} ->
+                mod.start()
               {:error, :nofile} ->
                 :ok
             end
