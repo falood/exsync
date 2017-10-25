@@ -4,9 +4,12 @@ defmodule ExSync do
   def start(_, _) do
     case Mix.env do
       :dev ->
-        ExSync.SrcMonitor.start_link()
+        if ExSync.Config.src_monitor_enabled do
+          ExSync.SrcMonitor.start_link()
+          Logger.info "ExSync source monitor started."
+        end
         ExSync.BeamMonitor.start_link()
-        Logger.info "ExSync started."
+        Logger.info "ExSync beam monitor started."
       _ ->
         Logger.error "ExSync NOT started. Only `:dev` environment is supported."
     end
