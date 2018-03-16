@@ -15,32 +15,38 @@ ExSync deps on [FileSystem](https://github.com/falood/file_system)
 
 2. Add exsync to your `mix.exs` dependencies:
 
-        def deps do
-          [ {:exsync, "~> 0.2", only: :dev} ]
-        end
+```elixir
+def deps do
+  [ {:exsync, "~> 0.2", only: :dev} ]
+end
+```
 
 3. Start your application the usual way, e.g., `iex -S mix`, then:
 
-        ExSync.start()
+```elixir
+ExSync.start()
+```
 
 4. (Alternative) Always start ExSync when available, add the following to an application's `start/2`:
 
-        defmodule MyApp do
-          use Application
+```elixir
+defmodule MyApp do
+  use Application
 
-          def start(_type, _args) do
-            import Supervisor.Spec, warn: false
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
 
-            case Code.ensure_loaded(ExSync) do
-              {:module, ExSync = mod} ->
-                mod.start()
-              {:error, :nofile} ->
-                :ok
-            end
+    case Code.ensure_loaded(ExSync) do
+      {:module, ExSync = mod} ->
+        mod.start()
+      {:error, :nofile} ->
+        :ok
+    end
 
-            # ... rest of your applications start script.
-          end
-        end
+    # ... rest of your applications start script.
+  end
+end
+```
 
 ## Usage for umbrella project
 
@@ -50,9 +56,11 @@ ExSync deps on [FileSystem](https://github.com/falood/file_system)
 
 2. Add exsync to your `mix.exs` dependencies:
 
-        def deps do
-          [ {:exsync, "~> 0.2", only: :dev} ]
-        end
+```elixir
+def deps do
+  [ {:exsync, "~> 0.2", only: :dev} ]
+end
+```
 
 3. start your umbrella project with `exsync` task
 
@@ -62,8 +70,12 @@ ExSync deps on [FileSystem](https://github.com/falood/file_system)
 
 1. add your own dirs to monitor, if you want monitor `priv` dir, use such config:
 
-        config :exsync, :addition_dirs, ["/priv"]
+```elixir
+config :exsync, :addition_dirs, ["/priv"]
+```
 
 2. add your own extensions
 
-        config :exsync, :extensions, [".erl", ".hrl", ".ex", ".tpl"]
+```elixir
+config :exsync, :extensions, [".erl", ".hrl", ".ex", ".tpl"]
+```
