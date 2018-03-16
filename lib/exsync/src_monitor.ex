@@ -7,7 +7,11 @@ defmodule ExSync.SrcMonitor do
   end
 
   def init([]) do
-    {:ok, watcher_pid} = FileSystem.start_link(dirs: ExSync.Config.src_dirs)
+    {:ok, watcher_pid} =
+      FileSystem.start_link(
+        dirs: ExSync.Config.src_dirs,
+        backend: Application.get_env(:file_system, :backend)
+      )
     FileSystem.subscribe(watcher_pid)
     {:ok, %{watcher_pid: watcher_pid}}
   end
