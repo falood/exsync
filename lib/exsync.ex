@@ -2,17 +2,20 @@ require Logger
 
 defmodule ExSync do
   def start(_, _) do
-    case Mix.env do
+    case Mix.env() do
       :dev ->
-        if ExSync.Config.src_monitor_enabled do
+        if ExSync.Config.src_monitor_enabled() do
           ExSync.SrcMonitor.start_link()
-          Logger.info "ExSync source monitor started."
+          Logger.info("ExSync source monitor started.")
         end
+
         ExSync.BeamMonitor.start_link()
-        Logger.info "ExSync beam monitor started."
+        Logger.info("ExSync beam monitor started.")
+
       _ ->
-        Logger.error "ExSync NOT started. Only `:dev` environment is supported."
+        Logger.error("ExSync NOT started. Only `:dev` environment is supported.")
     end
+
     {:ok, self()}
   end
 
