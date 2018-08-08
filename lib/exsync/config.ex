@@ -12,9 +12,22 @@ defmodule ExSync.Config do
         Mix.Project.in_project(app, opts[:path], config, fn _ -> beam_dirs() end)
       end
     else
-      [Mix.Project.compile_path()]
+      dep_paths =
+        Mix.Dep.cached()
+        |> Enum.filter(fn dep -> dep.opts[:path] != nil end)
+        |> Enum.map(fn %Mix.Dep{app: app, opts: opts} ->
+          config = [
+            umbrella?: opts[:in_umbrella],
+            app_path: opts[:build]
+          ]
+
+          Mix.Project.in_project(app, opts[:path], config, fn _ -> beam_dirs() end)
+        end)
+
+      [Mix.Project.compile_path() | dep_paths]
     end
     |> List.flatten()
+    |> Enum.uniq()
   end
 
   def src_monitor_enabled do
@@ -48,14 +61,25 @@ defmodule ExSync.Config do
         Mix.Project.in_project(app, opts[:path], fn _ -> src_default_dirs() end)
       end
     else
-      Mix.Project.config()
-      |> Keyword.take([:elixirc_paths, :erlc_paths, :erlc_include_path])
-      |> Keyword.values()
-      |> List.flatten()
-      |> Enum.map(&Path.join(app_source_dir(), &1))
-      |> Enum.filter(&File.exists?/1)
+      dep_paths =
+        Mix.Dep.cached()
+        |> Enum.filter(fn dep -> dep.opts[:path] != nil end)
+        |> Enum.map(fn %Mix.Dep{app: app, opts: opts} ->
+          Mix.Project.in_project(app, opts[:path], fn _ -> src_default_dirs() end)
+        end)
+
+      self_paths =
+        Mix.Project.config()
+        |> Keyword.take([:elixirc_paths, :erlc_paths, :erlc_include_path])
+        |> Keyword.values()
+        |> List.flatten()
+        |> Enum.map(&Path.join(app_source_dir(), &1))
+        |> Enum.filter(&File.exists?/1)
+
+      [self_paths | dep_paths]
     end
     |> List.flatten()
+    |> Enum.uniq()
   end
 
   defp src_addition_dirs do
