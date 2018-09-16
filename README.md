@@ -21,7 +21,7 @@ def deps do
 end
 ```
 
-3. Start your application the usual way, e.g., `iex -S mix`, then:
+3. (If runing Elixir < 1.4) Start your application the usual way, e.g., `iex -S mix`, then:
 
 ```elixir
 ExSync.start()
