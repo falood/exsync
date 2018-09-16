@@ -17,7 +17,7 @@ defmodule ExSync.SrcMonitor do
   end
 
   def handle_info(
-        {:file_event, watcher_pid, {path, _events}},
+        {:file_event, watcher_pid, {path, events}},
         %{watcher_pid: watcher_pid} = state
       ) do
     if Path.extname(path) in ExSync.Config.src_extensions() do
