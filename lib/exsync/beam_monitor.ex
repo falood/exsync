@@ -17,8 +17,14 @@ defmodule ExSync.BeamMonitor do
       |> case do
         # update
         {_, _, true, true} ->
-          Logger.info("reload module #{Path.basename(path, ".beam")}")
-          ExSync.Utils.reload(path)
+          # At least on linux platform, we're seeing a :modified event followed by a
+          # :modified, closed event.  By ensuring the modified event arrives on its own,
+          # we should be ablle to ensure we reload only once in a cross-platorm friendly way.
+          # Note: TODO I don't have a Mac or Windows env to verify this!
+          if [:modified] == events do
+            Logger.info "reload module #{Path.basename(path, ".beam")}"
+            ExSync.Utils.reload path
+          end
 
         # temp file
         {true, true, _, false} ->
