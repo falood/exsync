@@ -27,7 +27,7 @@ end
 ExSync.start()
 ```
 
-4. (Alternative) Always start ExSync when available, add the following to an application's `start/2`:
+4. (Alternative) To always start ExSync when available, add the following to an application's `start/2`:
 
 ```elixir
 defmodule MyApp do
@@ -79,3 +79,14 @@ config :exsync, :addition_dirs, ["/priv"]
 ```elixir
 config :exsync, :extensions, [".erl", ".hrl", ".ex", ".tpl"]
 ```
+
+3. Add an [MFA](https://codereviewvideos.com/blog/what-is-mfa-in-elixir/) callback so that your code can implement special handling when files are done reloading.
+
+Example config:
+```elixir
+config :exsync,
+  reload_timeout: 75,
+  reload_callback: {MyApp.MyModule, :handle_reload, [42]}
+```
+
+This will call your `MyApp.MyModule` module after there have been no new reloads detected after 75ms. Specifically it will make a call like `MyApp.MyModule.handle_reload(42)` (any items you put in the list will be added as arguments to [`Task.start/3`](https://hexdocs.pm/elixir/Task.html#start/3))
