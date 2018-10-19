@@ -66,14 +66,14 @@ defmodule ExSync.Config do
   defp src_default_dirs do
     if Mix.Project.umbrella?() do
       for %Mix.Dep{app: app, opts: opts} <- Mix.Dep.Umbrella.loaded() do
-        Mix.Project.in_project(app, opts[:path], fn _ -> src_default_dirs() end)
+        Mix.Project.in_project(app, opts[:dest], fn _ -> src_default_dirs() end)
       end
     else
       dep_paths =
         Mix.Dep.cached()
-        |> Enum.filter(fn dep -> dep.opts[:path] != nil end)
+        |> Enum.filter(fn dep -> dep.opts[:dest] != nil end)
         |> Enum.map(fn %Mix.Dep{app: app, opts: opts} ->
-          Mix.Project.in_project(app, opts[:path], fn _ -> src_default_dirs() end)
+          Mix.Project.in_project(app, opts[:dest], fn _ -> src_default_dirs() end)
         end)
 
       self_paths =
