@@ -26,7 +26,7 @@ defmodule ExSync.SrcMonitor do
       # Rather than coding specific behaviors for each OS, look for the modified event in
       # isolation to trigger things.
       # TODO: untested assumption that this behavior is common across Mac/Linux/Win
-      if [:modified] == events do
+      if :modified in events do
         ExSync.Utils.recomplete
       end
     end
