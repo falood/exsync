@@ -35,7 +35,7 @@ defmodule ExSync.SrcMonitor do
   end
 
   def handle_info({:file_event, watcher_pid, :stop}, %{watcher_pid: watcher_pid} = state) do
-    Logger.info("ExSync src monitor stopped.")
+    Logger.debug("ExSync src monitor stopped.")
     {:noreply, state}
   end
 end
