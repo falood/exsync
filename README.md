@@ -21,33 +21,6 @@ def deps do
 end
 ```
 
-3. (If runing Elixir < 1.4) Start your application the usual way, e.g., `iex -S mix`, then:
-
-```elixir
-ExSync.start()
-```
-
-4. (Alternative) To always start ExSync when available, add the following to an application's `start/2`:
-
-```elixir
-defmodule MyApp do
-  use Application
-
-  def start(_type, _args) do
-    import Supervisor.Spec, warn: false
-
-    case Code.ensure_loaded(ExSync) do
-      {:module, ExSync = mod} ->
-        mod.start()
-      {:error, :nofile} ->
-        :ok
-    end
-
-    # ... rest of your applications start script.
-  end
-end
-```
-
 ## Usage for umbrella project
 
 1. Create an umbrella project
