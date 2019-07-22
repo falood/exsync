@@ -23,13 +23,15 @@ defmodule ExSync.Config do
       dep_paths =
         Mix.Dep.cached()
         |> Enum.filter(fn dep -> dep.opts[:path] != nil end)
-        |> Enum.map(fn %Mix.Dep{app: app, opts: opts} ->
+        |> Enum.map(fn %Mix.Dep{app: app, opts: opts} = dep ->
           config = [
             umbrella?: opts[:in_umbrella],
             app_path: opts[:build]
           ]
 
-          Mix.Project.in_project(app, opts[:path], config, fn _ -> beam_dirs() end)
+          path = resolve_dep_path(dep)
+
+          Mix.Project.in_project(app, path, config, fn _ -> beam_dirs() end)
         end)
 
       [Mix.Project.compile_path() | dep_paths]
@@ -72,8 +74,12 @@ defmodule ExSync.Config do
       dep_paths =
         Mix.Dep.cached()
         |> Enum.filter(fn dep -> dep.opts[:path] != nil end)
-        |> Enum.map(fn %Mix.Dep{app: app, opts: opts} ->
-          Mix.Project.in_project(app, opts[:path], fn _ -> src_default_dirs() end)
+        |> Enum.map(fn %Mix.Dep{app: app} = dep ->
+          path = resolve_dep_path(dep)
+
+          Mix.Project.in_project(app, path, fn _ ->
+            src_default_dirs()
+          end)
         end)
 
       self_paths =
@@ -94,6 +100,14 @@ defmodule ExSync.Config do
     Application.get_env(:exsync, :addition_dirs, [])
     |> Enum.map(&Path.join(app_source_dir(), &1))
     |> Enum.filter(&File.exists?/1)
+  end
+
+  # Resolve dep path (which may be a relative path)
+  defp resolve_dep_path(%Mix.Dep{} = dep) do
+    %Mix.Dep{from: from, opts: opts} = dep
+    dep_path = opts[:path]
+    dep_dir = Path.dirname(from)
+    Path.expand(dep_path, dep_dir)
   end
 
   def src_extensions do
