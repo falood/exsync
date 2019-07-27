@@ -5,7 +5,7 @@ defmodule ExSync.Mixfile do
     [
       app: :exsync,
       version: "0.2.4",
-      elixir: "~> 1.3",
+      elixir: "~> 1.4",
       elixirc_paths: ["lib", "web"],
       deps: deps(),
       description: "Yet another Elixir reloader.",
@@ -19,7 +19,10 @@ defmodule ExSync.Mixfile do
   end
 
   def application do
-    [mod: {ExSync, []}, applications: [:logger]]
+    [
+      mod: {ExSync, []},
+      extra_applications: [:logger]
+    ]
   end
 
   defp deps do
