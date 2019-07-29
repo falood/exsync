@@ -41,25 +41,33 @@ end
 
 ## Config
 
-1. add your own dirs to monitor, if you want monitor `priv` dir, use such config:
+All configuration for this library is handled via the application environment.
+
+`:addition_dirs` - Additional directories to monitor
+
+For example, to monitor the `priv` directory, add this to your `config.exs`:
 
 ```elixir
-config :exsync, :addition_dirs, ["/priv"]
+config :exsync, addition_dirs: ["/priv"]
 ```
 
-2. add your own extensions
+`:extensions` - List of file extensions to watch for changes. Defaults to: `[".erl", ".hrl", ".ex", ".eex"]`
+
+`:extra_extensions` - List of additional extensions to watch for changes (cannot be used with `:extensions`)
+
+For example, to watch `.js` and `.css` files add this to your `config.exs`:
 
 ```elixir
-config :exsync, :extensions, [".erl", ".hrl", ".ex", ".tpl"]
+config :exsync, extra_extensions: [".js", ".css"]
 ```
 
-3. Add an [MFA](https://codereviewvideos.com/blog/what-is-mfa-in-elixir/) callback so that your code can implement special handling when files are done reloading.
+`:reload_callback`: A callback [MFA](https://codereviewvideos.com/blog/what-is-mfa-in-elixir/) that is called when a set of files are done reloading. Can be used to implement your own special handling to react to file reloads.
+`:reload_timeout`: Amount of time to wait in milliseconds before triggering the `:reload_callback`. Defaults to 150ms.
 
-Example config:
+For example, to call `MyApp.MyModule.handle_reload()` add this to your `config.exs`:
+
 ```elixir
 config :exsync,
   reload_timeout: 75,
-  reload_callback: {MyApp.MyModule, :handle_reload, [42]}
+  reload_callback: {MyApp.MyModule, :handle_reload, []}
 ```
-
-This will call your `MyApp.MyModule` module after there have been no new reloads detected after 75ms. Specifically it will make a call like `MyApp.MyModule.handle_reload(42)` (any items you put in the list will be added as arguments to [`Task.start/3`](https://hexdocs.pm/elixir/Task.html#start/3))
