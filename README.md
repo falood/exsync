@@ -61,8 +61,9 @@ For example, to watch `.js` and `.css` files add this to your `config.exs`:
 config :exsync, extra_extensions: [".js", ".css"]
 ```
 
-`:reload_callback`: A callback [MFA](https://codereviewvideos.com/blog/what-is-mfa-in-elixir/) that is called when a set of files are done reloading. Can be used to implement your own special handling to react to file reloads.
-`:reload_timeout`: Amount of time to wait in milliseconds before triggering the `:reload_callback`. Defaults to 150ms.
+`:reload_callback` - A callback [MFA](https://codereviewvideos.com/blog/what-is-mfa-in-elixir/) that is called when a set of files are done reloading. Can be used to implement your own special handling to react to file reloads.
+
+`:reload_timeout` - Amount of time to wait in milliseconds before triggering the `:reload_callback`. Defaults to 150ms.
 
 For example, to call `MyApp.MyModule.handle_reload()` add this to your `config.exs`:
 
