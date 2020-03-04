@@ -11,7 +11,9 @@ ExSync deps on [FileSystem](https://github.com/falood/file_system)
 
 1. Create a new application:
 
-        mix new my_app
+```bash
+mix new my_app
+```
 
 2. Add exsync to your `mix.exs` dependencies:
 
@@ -25,7 +27,9 @@ end
 
 1. Create an umbrella project
 
-        mix new my_umbrella_app --umbrella
+```bash
+mix new my_umbrella_app --umbrella
+```
 
 2. Add exsync to your `mix.exs` dependencies:
 
@@ -37,7 +41,9 @@ end
 
 3. start your umbrella project with `exsync` task
 
-        iex -S mix exsync
+```bash
+iex -S mix exsync
+```
 
 ## Config
 
