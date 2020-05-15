@@ -24,8 +24,11 @@ defmodule ExSync.Logger.Server do
     end
   end
 
-  def log(message) do
-    GenServer.call(__MODULE__, {:log, message})
+  def debug(message), do: log(:debug, message)
+  def error(message), do: log(:error, message)
+
+  def log(level, message) do
+    GenServer.call(__MODULE__, {:log, level, message})
   end
 
   @impl GenServer
@@ -34,8 +37,8 @@ defmodule ExSync.Logger.Server do
   end
 
   @impl GenServer
-  def handle_call({:log, message}, _from, state) do
-    maybe_log(message, state.group_leaders)
+  def handle_call({:log, level, message}, _from, state) do
+    maybe_log(message, level, state.group_leaders)
     {:reply, :ok, state}
   end
 
@@ -43,16 +46,20 @@ defmodule ExSync.Logger.Server do
     {:reply, :ok, %State{state | group_leaders: MapSet.put(state.group_leaders, pid)}}
   end
 
-  defp maybe_log(message, group_leaders) do
+  defp maybe_log(message, level, group_leaders) do
     if ExSync.Config.logging_enabled() do
-      message = color_message(["[exsync] ", message])
+      message = color_message(["[exsync] ", message], level)
 
       MapSet.to_list(group_leaders)
       |> Enum.each(&IO.puts(&1, message))
     end
   end
 
-  defp color_message(message) do
-    [IO.ANSI.format_fragment(:cyan, true), message | IO.ANSI.reset()]
+  defp color_message(message, level) do
+    color = color(level)
+    [IO.ANSI.format_fragment(color, true), message | IO.ANSI.reset()]
   end
+
+  defp color(:debug), do: :cyan
+  defp color(:error), do: :red
 end
