@@ -1,6 +1,6 @@
 defmodule ExSync.Utils do
   def recomplete do
-    ExSync.Logger.debug("running mix compile")
+    ExSync.Logger.debug("running mix compile\n")
 
     System.cmd("mix", ["compile"], cd: ExSync.Config.app_source_dir())
     |> log_compile_cmd()
@@ -24,9 +24,21 @@ defmodule ExSync.Utils do
   end
 
   defp log_compile_cmd({output, status} = result) when is_binary(output) and status > 0 do
-    ExSync.Logger.error(["error while compiling\n", output])
+    ExSync.Logger.error(["error while compiling\n", output, "\n"])
     result
   end
 
-  defp log_compile_cmd(result), do: result
+  defp log_compile_cmd({"", _status} = result), do: result
+
+  defp log_compile_cmd({output, _status} = result) when is_binary(output) do
+    message = ["compiling\n", output]
+
+    if String.contains?(output, "warning:") do
+      ExSync.Logger.warn(message)
+    else
+      ExSync.Logger.debug(message)
+    end
+
+    result
+  end
 end
