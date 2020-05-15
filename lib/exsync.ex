@@ -8,11 +8,17 @@ defmodule ExSync do
 
         if ExSync.Config.src_monitor_enabled() do
           ExSync.SrcMonitor.start_link()
-          Logger.debug("ExSync source monitor started.")
+
+          if ExSync.Config.logging_enabled() do
+            Logger.debug("ExSync source monitor started.")
+          end
         end
 
         ExSync.BeamMonitor.start_link()
-        Logger.debug("ExSync beam monitor started.")
+
+        if ExSync.Config.logging_enabled() do
+          Logger.debug("ExSync beam monitor started.")
+        end
 
       _ ->
         Logger.error("ExSync NOT started. Only `:dev` environment is supported.")
