@@ -11,7 +11,7 @@ defmodule ExSync.Logger.Server do
   end
 
   def start_link(opts \\ []) do
-    {:ok, GenServer.start_link(__MODULE__, opts, name: __MODULE__)}
+    GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
   @doc """
@@ -25,6 +25,8 @@ defmodule ExSync.Logger.Server do
   end
 
   def debug(message), do: log(:debug, message)
+  def info(message), do: log(:info, message)
+  def warn(message), do: log(:warn, message)
   def error(message), do: log(:error, message)
 
   def log(level, message) do
@@ -51,7 +53,7 @@ defmodule ExSync.Logger.Server do
       message = color_message(["[exsync] ", message], level)
 
       MapSet.to_list(group_leaders)
-      |> Enum.each(&IO.puts(&1, message))
+      |> Enum.each(&IO.binwrite(&1, message))
     end
   end
 
@@ -61,5 +63,7 @@ defmodule ExSync.Logger.Server do
   end
 
   defp color(:debug), do: :cyan
+  defp color(:info), do: :normal
+  defp color(:warn), do: :yellow
   defp color(:error), do: :red
 end

@@ -1,10 +1,11 @@
-require Logger
-
 defmodule ExSync.SrcMonitor do
-  def start_link do
+  use GenServer
+
+  def start_link(_opts \\ []) do
     GenServer.start_link(__MODULE__, [])
   end
 
+  @impl GenServer
   def init([]) do
     {:ok, watcher_pid} =
       FileSystem.start_link(
@@ -13,9 +14,11 @@ defmodule ExSync.SrcMonitor do
       )
 
     FileSystem.subscribe(watcher_pid)
+    ExSync.Logger.debug("ExSync source monitor started.\n")
     {:ok, %{watcher_pid: watcher_pid}}
   end
 
+  @impl GenServer
   def handle_info({:file_event, watcher_pid, {path, events}}, %{watcher_pid: watcher_pid} = state) do
     if Path.extname(path) in ExSync.Config.src_extensions() do
       # This may also vary based on editor - when saving a file in neovim on linux,
@@ -35,7 +38,7 @@ defmodule ExSync.SrcMonitor do
   end
 
   def handle_info({:file_event, watcher_pid, :stop}, %{watcher_pid: watcher_pid} = state) do
-    Logger.debug("ExSync src monitor stopped.")
+    ExSync.Logger.debug("ExSync src monitor stopped.\n")
     {:noreply, state}
   end
 end

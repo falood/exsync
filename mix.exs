@@ -20,7 +20,7 @@ defmodule ExSync.Mixfile do
 
   def application do
     [
-      mod: {ExSync, []},
+      mod: {ExSync.Application, []},
       extra_applications: [:logger]
     ]
   end
