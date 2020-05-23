@@ -23,6 +23,17 @@ def deps do
 end
 ```
 
+Optionally add this snippet to your `.iex.exs` (in the root of your project) or your `~/.iex.exs`:
+```
+if Code.ensure_loaded?(ExSync) && function_exported?(ExSync, :register_group_leader, 0) do
+  ExSync.register_group_leader()
+end
+```
+
+This will prevent the ExSync logs from overwriting your IEx prompt.
+Alternatively you can always just run `ExSync.register_group_leader()` in your
+IEx prompt.
+
 ## Usage for umbrella project
 
 1. Create an umbrella project
@@ -66,6 +77,8 @@ For example, to watch `.js` and `.css` files add this to your `config.exs`:
 ```elixir
 config :exsync, extra_extensions: [".js", ".css"]
 ```
+
+`:logging_enabled` - Set to false to disable logging (default true)
 
 `:reload_callback` - A callback [MFA](https://codereviewvideos.com/blog/what-is-mfa-in-elixir/) that is called when a set of files are done reloading. Can be used to implement your own special handling to react to file reloads.
 

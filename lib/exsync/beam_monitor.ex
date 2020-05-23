@@ -29,7 +29,8 @@ defmodule ExSync.BeamMonitor do
           # we should be ablle to ensure we reload only once in a cross-platorm friendly way.
           # Note: TODO I don't have a Mac or Windows env to verify this!
           if :modified in events do
-            Logger.debug("reload module #{Path.basename(path, ".beam")}")
+            ExSync.Logger.log("reload module #{Path.basename(path, ".beam")}")
+
             ExSync.Utils.reload(path)
           end
 
@@ -39,7 +40,7 @@ defmodule ExSync.BeamMonitor do
 
         # remove
         {_, true, _, false} ->
-          Logger.debug("unload module #{Path.basename(path, ".beam")}")
+          ExSync.Logger.log("unload module #{Path.basename(path, ".beam")}")
           ExSync.Utils.unload(path)
 
         # create
@@ -55,12 +56,12 @@ defmodule ExSync.BeamMonitor do
   end
 
   def handle_info({:file_event, watcher_pid, :stop}, %{watcher_pid: watcher_pid} = state) do
-    Logger.debug("ExSync beam monitor stopped.")
+    ExSync.Logger.log("beam monitor stopped")
     {:noreply, state}
   end
 
   def handle_info(:reload_complete, state) do
-    Logger.debug("ExSync reload complete!")
+    ExSync.Logger.log("reload complete")
 
     if callback = ExSync.Config.reload_callback() do
       {mod, fun, args} = callback

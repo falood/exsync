@@ -5,6 +5,10 @@ defmodule ExSync.Config do
     Application.get_env(application(), :reload_timeout, 150)
   end
 
+  def logging_enabled do
+    Application.get_env(application(), :logging_enabled, true)
+  end
+
   def reload_callback do
     Application.get_env(application(), :reload_callback)
   end
