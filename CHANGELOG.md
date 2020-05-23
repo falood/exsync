@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 * Make logging configurable and make logging (optionally) not overwrite the IEx prompt [#32](https://github.com/falood/exsync/pull/32)
 * Ensure that compilation errors are displayed in the console [#33](https://github.com/falood/exsync/pull/33)
+* Add a supervision hierarchy [#35](https://github.com/falood/exsync/pull/35)
 
 ### Breaking Changes
 
