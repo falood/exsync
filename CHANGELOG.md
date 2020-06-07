@@ -10,6 +10,7 @@ Improvements:
 * Make logging configurable and make logging (optionally) not overwrite the IEx prompt [#32](https://github.com/falood/exsync/pull/32)
 * Ensure that compilation errors are displayed in the console [#33](https://github.com/falood/exsync/pull/33)
 * Add a supervision hierarchy [#35](https://github.com/falood/exsync/pull/35)
+* Handle terminals that don't support ANSI colors [#38](https://github.com/falood/exsync/pull/38)
 
 Bug fixes:
 * Fix log when there are no configured group leaders [#36](https://github.com/falood/exsync/pull/36)
