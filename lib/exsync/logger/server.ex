@@ -50,10 +50,14 @@ defmodule ExSync.Logger.Server do
 
   defp maybe_log(message, level, group_leaders) do
     if ExSync.Config.logging_enabled() do
-      message = color_message(["[exsync] ", message], level)
+      if Enum.empty?(group_leaders) do
+        Logger.log(level, message)
+      else
+        message = color_message(["[exsync] ", message], level)
 
-      MapSet.to_list(group_leaders)
-      |> Enum.each(&IO.binwrite(&1, message))
+        MapSet.to_list(group_leaders)
+        |> Enum.each(&IO.binwrite(&1, message))
+      end
     end
   end
 
