@@ -2,7 +2,7 @@ defmodule ExSync.Utils do
   def recomplete do
     ExSync.Logger.debug("running mix compile\n")
 
-    System.cmd("mix", ["compile"], cd: ExSync.Config.app_source_dir())
+    System.cmd("mix", ["compile"], cd: ExSync.Config.app_source_dir(), stderr_to_stdout: true)
     |> log_compile_cmd()
   end
 
