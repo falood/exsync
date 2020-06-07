@@ -47,9 +47,10 @@ defmodule ExSync.Config do
   def src_monitor_enabled do
     case Application.fetch_env(application(), :src_monitor) do
       :error ->
-        Logger.debug(
-          "Defaulting to enable source monitor, set config :exsync, src_monitor: false to disable"
-        )
+        Logger.debug([
+          "Defaulting to enable source monitor, set config :exsync, src_monitor: false",
+          " to disable\n"
+        ])
 
         true
 
@@ -57,9 +58,10 @@ defmodule ExSync.Config do
         value
 
       {:ok, invalid} ->
-        Logger.error(
-          "Value #{inspect(invalid)} not valid for setting :src_monitor, expected true or false.  Enabling source monitor."
-        )
+        Logger.error([
+          "Value #{inspect(invalid)} not valid for setting :src_monitor, expected",
+          " true or false.  Enabling source monitor."
+        ])
 
         true
     end

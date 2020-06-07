@@ -26,7 +26,10 @@ defmodule ExSync.Mixfile do
   end
 
   defp deps do
-    [{:ex_doc, "~> 0.14", only: :docs}, {:file_system, "~> 0.2"}]
+    [
+      {:ex_doc, "~> 0.14", only: :docs},
+      {:file_system, "~> 0.2"}
+    ]
   end
 
   defp package do
