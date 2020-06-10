@@ -11,6 +11,7 @@ Improvements:
 * Ensure that compilation errors are displayed in the console [#33](https://github.com/falood/exsync/pull/33)
 * Add a supervision hierarchy [#35](https://github.com/falood/exsync/pull/35)
 * Handle terminals that don't support ANSI colors [#38](https://github.com/falood/exsync/pull/38)
+* Improvement to stderr output [#39](https://github.com/falood/exsync/pull/39)
 
 Bug fixes:
 * Fix log when there are no configured group leaders [#36](https://github.com/falood/exsync/pull/36)
