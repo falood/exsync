@@ -19,7 +19,9 @@ mix new my_app
 
 ```elixir
 def deps do
-  [ {:exsync, "~> 0.2", only: :dev} ]
+  [
+    {:exsync, "~> 0.2", only: :dev},
+  ]
 end
 ```
 
@@ -46,7 +48,9 @@ mix new my_umbrella_app --umbrella
 
 ```elixir
 def deps do
-  [ {:exsync, "~> 0.2", only: :dev} ]
+  [
+    {:exsync, "~> 0.2", only: :dev},
+  ]
 end
 ```
 
