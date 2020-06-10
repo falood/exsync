@@ -62,8 +62,12 @@ defmodule ExSync.Logger.Server do
   end
 
   defp color_message(message, level) do
-    color = color(level)
-    [IO.ANSI.format_fragment(color, true), message | IO.ANSI.reset()]
+    if IO.ANSI.enabled?() do
+      color = color(level)
+      [IO.ANSI.format_fragment(color, true), message | IO.ANSI.reset()]
+    else
+      message
+    end
   end
 
   defp color(:debug), do: :cyan
