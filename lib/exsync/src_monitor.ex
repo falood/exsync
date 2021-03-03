@@ -20,7 +20,7 @@ defmodule ExSync.SrcMonitor do
       )
 
     FileSystem.subscribe(watcher_pid)
-    ExSync.Logger.debug("ExSync source monitor started.\n")
+    ExSync.Logger.debug("ExSync source monitor started.")
     {:ok, %State{watcher_pid: watcher_pid}}
   end
 
@@ -48,7 +48,7 @@ defmodule ExSync.SrcMonitor do
   end
 
   def handle_info({:file_event, watcher_pid, :stop}, %{watcher_pid: watcher_pid} = state) do
-    ExSync.Logger.debug("ExSync src monitor stopped.\n")
+    ExSync.Logger.debug("ExSync src monitor stopped.")
     {:noreply, state}
   end
 
