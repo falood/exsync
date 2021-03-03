@@ -45,10 +45,6 @@ defmodule ExSync.BeamMonitor do
 
     action = action(Path.extname(path), path, events)
 
-    # ExSync.Logger.debug("#{inspect action} changes to #{inspect path}\n")
-    # TODO: Passing a list to debug appears to be broken
-    # ExSync.Logger.debug([inspect(action), " changes to ", inspect(path), "\n"])
-
     state =
       track_module_change(action, path, state)
       # TODO: Is this correct?
@@ -84,9 +80,6 @@ defmodule ExSync.BeamMonitor do
   end
 
   defp action(".beam", path, events) do
-    # At least on linux platform, we're seeing a :modified event followed by a
-    # :modified, closed event.  By ensuring the modified event arrives on its own,
-    # we should be ablle to ensure we reload only once in a cross-platorm friendly way.
     case {:created in events, :removed in events, :modified in events, File.exists?(path)} do
       # update
       {_, _, true, true} -> :reload_module
