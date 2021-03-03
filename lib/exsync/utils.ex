@@ -1,13 +1,13 @@
 defmodule ExSync.Utils do
   def recomplete do
-    ExSync.Logger.debug("running mix compile\n")
+    ExSync.Logger.debug("running mix compile")
 
     System.cmd("mix", ["compile"], cd: ExSync.Config.app_source_dir(), stderr_to_stdout: true)
     |> log_compile_cmd()
   end
 
   def unload(module) when is_atom(module) do
-    ExSync.Logger.debug("unload module #{inspect module}\n")
+    ExSync.Logger.debug("unload module #{inspect module}")
     module |> :code.purge()
     module |> :code.delete()
   end
@@ -18,7 +18,7 @@ defmodule ExSync.Utils do
 
   # beam file path
   def reload(beam_path) do
-    ExSync.Logger.debug("reload module #{Path.basename(beam_path, ".beam")}\n")
+    ExSync.Logger.debug("reload module #{Path.basename(beam_path, ".beam")}")
     file = beam_path |> to_charlist
     {:ok, binary, _} = :erl_prim_loader.get_file(file)
     module = beam_path |> Path.basename(".beam") |> String.to_atom()
@@ -26,7 +26,7 @@ defmodule ExSync.Utils do
   end
 
   defp log_compile_cmd({output, status} = result) when is_binary(output) and status > 0 do
-    ExSync.Logger.error(["error while compiling\n", output, "\n"])
+    ExSync.Logger.error(["error while compiling\n", output])
     result
   end
 

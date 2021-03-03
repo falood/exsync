@@ -22,7 +22,7 @@ defmodule ExSync.BeamMonitor do
   def init(opts) when is_list(opts) do
     {:ok, watcher_pid} = FileSystem.start_link(dirs: ExSync.Config.beam_dirs())
     FileSystem.subscribe(watcher_pid)
-    ExSync.Logger.debug("ExSync beam monitor started.\n")
+    ExSync.Logger.debug("ExSync beam monitor started.")
 
     state = %State{
       finished_reloading_timer: false,
@@ -57,7 +57,7 @@ defmodule ExSync.BeamMonitor do
   end
 
   def handle_info({:file_event, watcher_pid, :stop}, %{watcher_pid: watcher_pid} = state) do
-    ExSync.Logger.debug("beam monitor stopped\n")
+    ExSync.Logger.debug("beam monitor stopped")
     {:noreply, state}
   end
 
@@ -69,7 +69,7 @@ defmodule ExSync.BeamMonitor do
   end
 
   def handle_info(:reload_complete, state) do
-    ExSync.Logger.debug("reload complete\n")
+    ExSync.Logger.debug("reload complete")
 
     if callback = ExSync.Config.reload_callback() do
       {mod, fun, args} = callback
@@ -122,7 +122,7 @@ defmodule ExSync.BeamMonitor do
     if Enum.empty?(reload_set) && Enum.empty?(unload_set) do
       state
     else
-      # ExSync.Logger.debug("BeamMonitor Start throttle timer\n")
+      # ExSync.Logger.debug("BeamMonitor Start throttle timer")
       throttle_timer = Process.send_after(self(), :throttle_timer_complete, @throttle_timeout_ms)
       %State{state | throttle_timer: throttle_timer}
     end

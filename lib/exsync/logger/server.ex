@@ -53,7 +53,7 @@ defmodule ExSync.Logger.Server do
       if Enum.empty?(group_leaders) do
         Logger.log(level, message)
       else
-        message = color_message(["[exsync] ", message], level)
+        message = color_message(["[exsync] ", message, "\n"], level)
 
         MapSet.to_list(group_leaders)
         |> Enum.each(&IO.binwrite(&1, message))
