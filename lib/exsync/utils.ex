@@ -7,7 +7,7 @@ defmodule ExSync.Utils do
   end
 
   def unload(module) when is_atom(module) do
-    ExSync.Logger.debug("unload module #{inspect module}")
+    ExSync.Logger.debug("unload module #{inspect(module)}")
     module |> :code.purge()
     module |> :code.delete()
   end
