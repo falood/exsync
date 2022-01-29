@@ -25,6 +25,8 @@ def deps do
 end
 ```
 
+NOTE: if you have an umbrella application then add ExSync to one the apps in the umbrella.
+
 Optionally add this snippet to your `.iex.exs` (in the root of your project) or your `~/.iex.exs`:
 ```
 if Code.ensure_loaded?(ExSync) && function_exported?(ExSync, :register_group_leader, 0) do
@@ -35,30 +37,6 @@ end
 This will prevent the ExSync logs from overwriting your IEx prompt.
 Alternatively you can always just run `ExSync.register_group_leader()` in your
 IEx prompt.
-
-## Usage for umbrella project
-
-1. Create an umbrella project
-
-```bash
-mix new my_umbrella_app --umbrella
-```
-
-2. Add exsync to your `mix.exs` dependencies:
-
-```elixir
-def deps do
-  [
-    {:exsync, "~> 0.2", only: :dev},
-  ]
-end
-```
-
-3. start your umbrella project with `exsync` task
-
-```bash
-iex -S mix exsync
-```
 
 ## Config
 
