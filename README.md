@@ -25,7 +25,7 @@ def deps do
 end
 ```
 
-NOTE: if you have an umbrella application then add it to one the apps in the umbrella.
+NOTE: if you have an umbrella application then add ExSync to one the apps in the umbrella.
 
 Optionally add this snippet to your `.iex.exs` (in the root of your project) or your `~/.iex.exs`:
 ```
