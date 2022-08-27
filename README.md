@@ -1,11 +1,16 @@
 ExSync
 ======
 
-Yet another Elixir reloader.
+An Elixir reloader. When your code changes, ExSync automatically recompiles it.
+
+Supports recompiling `:path` dependencies without additional configuration. Also
+supports a `:reload_callback` which is an MFA (Module Function Arguments) that
+will be called after each time the code is recompiled.
 
 ## System Support
 
-ExSync deps on [FileSystem](https://github.com/falood/file_system)
+ExSync depends on [FileSystem](https://github.com/falood/file_system) which has
+some required dependencies.
 
 ## Usage
 
