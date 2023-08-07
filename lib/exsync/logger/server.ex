@@ -26,7 +26,7 @@ defmodule ExSync.Logger.Server do
 
   def debug(message), do: log(:debug, message)
   def info(message), do: log(:info, message)
-  def warn(message), do: log(:warn, message)
+  def warn(message), do: log(:warning, message)
   def error(message), do: log(:error, message)
 
   def log(level, message) do

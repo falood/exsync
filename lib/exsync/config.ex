@@ -38,7 +38,9 @@ defmodule ExSync.Config do
           Mix.Project.in_project(app, path, config, fn _ -> beam_dirs() end)
         end)
 
-      [Mix.Project.compile_path() | dep_paths]
+      # Elixir 1.15/OTP 26 compiles into the project build_path, but
+      # we append dep_paths to support earlier versions
+      [Mix.Project.build_path() | dep_paths]
     end
     |> List.flatten()
     |> Enum.uniq()
