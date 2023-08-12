@@ -12,7 +12,8 @@ defmodule ExSync.Mixfile do
       elixirc_paths: ["lib", "web"],
       deps: deps(),
       description: "Yet another Elixir reloader.",
-      source_url: "https://github.comb/falood/exsync",
+      source_url: @source_url,
+      homepage_url: @source_url,
       package: package(),
       docs: docs()
     ]
@@ -49,7 +50,6 @@ defmodule ExSync.Mixfile do
       ],
       main: "readme",
       source_ref: "v#{@version}",
-      homepage_url: @source_url
     ]
   end
 end
