@@ -49,7 +49,7 @@ defmodule ExSync.Mixfile do
         LICENSE: [title: "License"]
       ],
       main: "readme",
-      source_ref: "v#{@version}",
+      source_ref: "v#{@version}"
     ]
   end
 end
