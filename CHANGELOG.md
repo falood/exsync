@@ -3,10 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [Unreleased]
+## [0.3.0] - 2023-08-12
 
 Improvements:
-
+* Add support for Elixir 1.15 and OTP 26 [#54](https://github.com/falood/exsync/pull/54)
+* Remove excess newlines [#44](https://github.com/falood/exsync/pull/44)
 * Make logging configurable and make logging (optionally) not overwrite the IEx prompt [#32](https://github.com/falood/exsync/pull/32)
 * Ensure that compilation errors are displayed in the console [#33](https://github.com/falood/exsync/pull/33)
 * Add a supervision hierarchy [#35](https://github.com/falood/exsync/pull/35)
@@ -18,6 +19,7 @@ Bug fixes:
 
 ### Breaking Changes
 
+* Update umbrella instructions [#47](https://github.com/falood/exsync/pull/47)
 * Increase minimum supported Elixir version from 1.3 to 1.4
 
 ## [0.2.4] - 2019-07-22
