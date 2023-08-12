@@ -1,20 +1,20 @@
 defmodule ExSync.Mixfile do
   use Mix.Project
 
+  @source_url "https://github.com/falood/exsync"
+  @version "0.3.0"
+
   def project do
     [
       app: :exsync,
-      version: "0.3.0",
+      version: @version,
       elixir: "~> 1.4",
       elixirc_paths: ["lib", "web"],
       deps: deps(),
       description: "Yet another Elixir reloader.",
-      source_url: "https://github.com/falood/exsync",
+      source_url: "https://github.comb/falood/exsync",
       package: package(),
-      docs: [
-        extras: ["README.md"],
-        main: "readme"
-      ]
+      docs: docs()
     ]
   end
 
@@ -38,5 +38,18 @@ defmodule ExSync.Mixfile do
       licenses: ["BSD-3-Clause"],
       links: %{"Github" => "https://github.com/falood/exsync"}
     }
+  end
+
+  defp docs do
+    [
+      extras: [
+        "README.md": [],
+        "CHANGELOG.md": [],
+        LICENSE: [title: "License"]
+      ],
+      main: "readme",
+      source_ref: "v#{@version}",
+      homepage_url: @source_url
+    ]
   end
 end
