@@ -72,6 +72,6 @@ defmodule ExSync.Logger.Server do
 
   defp color(:debug), do: :cyan
   defp color(:info), do: :normal
-  defp color(:warn), do: :yellow
+  defp color(:warning), do: :yellow
   defp color(:error), do: :red
 end
