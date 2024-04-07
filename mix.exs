@@ -2,7 +2,7 @@ defmodule ExSync.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/falood/exsync"
-  @version "0.3.0"
+  @version "0.4.0"
 
   def project do
     [
