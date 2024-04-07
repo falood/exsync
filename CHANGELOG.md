@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## Unreleased
+
+Fix compilation warnings
+
+Remove the need to use `ExSync.register_group_leader` since the functionality it
+provided is no longer needed on newer Elixir/Erlang versions.
+
+This also removes the `ExSync.Logger.Server` module but that is an internal
+module that shouldn't have been accessed by user code.
+
 ## [0.3.0] - 2023-08-12
 
 Improvements:

@@ -19,7 +19,6 @@ defmodule ExSync.Application do
   def start_supervisor do
     children =
       [
-        ExSync.Logger.Server,
         maybe_include_src_monitor(),
         ExSync.BeamMonitor
       ]
@@ -42,6 +41,4 @@ defmodule ExSync.Application do
       []
     end
   end
-
-  defdelegate register_group_leader, to: ExSync.Logger.Server
 end

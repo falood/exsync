@@ -36,7 +36,7 @@ defmodule ExSync.Utils do
     message = ["compiling\n", output]
 
     if String.contains?(output, "warning:") do
-      ExSync.Logger.warn(message)
+      ExSync.Logger.warning(message)
     else
       ExSync.Logger.debug(message)
     end

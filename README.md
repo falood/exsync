@@ -32,17 +32,6 @@ end
 
 NOTE: if you have an umbrella application then add ExSync to one the apps in the umbrella.
 
-Optionally add this snippet to your `.iex.exs` (in the root of your project) or your `~/.iex.exs`:
-```
-if Code.ensure_loaded?(ExSync) && function_exported?(ExSync, :register_group_leader, 0) do
-  ExSync.register_group_leader()
-end
-```
-
-This will prevent the ExSync logs from overwriting your IEx prompt.
-Alternatively you can always just run `ExSync.register_group_leader()` in your
-IEx prompt.
-
 ## Config
 
 All configuration for this library is handled via the application environment.
