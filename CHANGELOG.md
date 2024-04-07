@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 Fix compilation warnings
 
+Allow using file_system 1.0
+
 Remove the need to use `ExSync.register_group_leader` since the functionality it
 provided is no longer needed on newer Elixir/Erlang versions.
 
