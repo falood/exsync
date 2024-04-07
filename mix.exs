@@ -35,7 +35,7 @@ defmodule ExSync.Mixfile do
 
   defp package do
     %{
-      maintainers: ["Xiangrong Hao"],
+      maintainers: ["Xiangrong Hao", "Jason Axelson"],
       licenses: ["BSD-3-Clause"],
       links: %{"Github" => "https://github.com/falood/exsync"}
     }
