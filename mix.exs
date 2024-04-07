@@ -8,7 +8,7 @@ defmodule ExSync.Mixfile do
     [
       app: :exsync,
       version: @version,
-      elixir: "~> 1.4",
+      elixir: "~> 1.11",
       elixirc_paths: ["lib", "web"],
       deps: deps(),
       description: "Yet another Elixir reloader.",

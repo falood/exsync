@@ -9,6 +9,8 @@ Fix compilation warnings
 
 Allow using file_system 1.0
 
+Update minimum Elixir version to 1.11
+
 Remove the need to use `ExSync.register_group_leader` since the functionality it
 provided is no longer needed on newer Elixir/Erlang versions.
 
