@@ -31,6 +31,7 @@ jobs:
       with:
         show-progress: false
     - uses: erlef/setup-beam@v1
+      id: setup-beam
       with:
         otp-version: ${{matrix.otp}}
         elixir-version: ${{matrix.elixir}}
