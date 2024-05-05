@@ -23,9 +23,13 @@ jobs:
         include:
           - elixir: 1.13.1
             otp: 24.2
+          - elixir: 1.16.2
+            otp: 26.2.5
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+      with:
+        show-progress: false
     - uses: erlef/setup-beam@v1
       with:
         otp-version: ${{matrix.otp}}
