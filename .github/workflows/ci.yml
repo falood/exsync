@@ -39,6 +39,8 @@ jobs:
           _build
           deps
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+    - name: Install inotify
+      run: sudo apt-get install inotify-tools
     - name: Install Dependencies
       run: |
         mix local.rebar --force
