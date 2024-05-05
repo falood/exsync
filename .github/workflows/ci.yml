@@ -23,22 +23,29 @@ jobs:
         include:
           - elixir: 1.13.1
             otp: 24.2
+          - elixir: 1.16.2
+            otp: 26.2.5
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+      with:
+        show-progress: false
     - uses: erlef/setup-beam@v1
+      id: setup-beam
       with:
         otp-version: ${{matrix.otp}}
         elixir-version: ${{matrix.elixir}}
     - name: Cache build artifacts
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: |
           ~/.hex
           ~/.mix
           _build
           deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        key: ${{ runner.os }}-otp-${{ steps.setup-beam.outputs.otp-version }}-elixir-${{ steps.setup-beam.outputs.elixir-version }}-mix-${{ hashFiles('**/mix.lock') }}
+    - name: Install inotify
+      run: sudo apt-get -qq install inotify-tools
     - name: Install Dependencies
       run: |
         mix local.rebar --force
