@@ -45,7 +45,7 @@ jobs:
           deps
         key: ${{ runner.os }}-otp-${{ steps.setup-beam.outputs.otp-version }}-elixir-${{ steps.setup-beam.outputs.elixir-version }}-mix-${{ hashFiles('**/mix.lock') }}
     - name: Install inotify
-      run: sudo apt-get install inotify-tools
+      run: sudo apt-get install -qq inotify-tools
     - name: Install Dependencies
       run: |
         mix local.rebar --force
