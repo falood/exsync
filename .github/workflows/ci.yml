@@ -42,7 +42,7 @@ jobs:
           ~/.mix
           _build
           deps
-        key: ${{ runner.os }}-otp-${{ steps.beam.outputs.otp-version }}-elixir-${{ steps.beam.outputs.elixir-version }}-mix-${{ hashFiles('**/mix.lock') }}
+        key: ${{ runner.os }}-otp-${{ steps.setup-beam.outputs.otp-version }}-elixir-${{ steps.setup-beam.outputs.elixir-version }}-mix-${{ hashFiles('**/mix.lock') }}
     - name: Install inotify
       run: sudo apt-get install inotify-tools
     - name: Install Dependencies
