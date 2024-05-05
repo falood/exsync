@@ -25,7 +25,7 @@ mix new my_app
 ```elixir
 def deps do
   [
-    {:exsync, "~> 0.2", only: :dev},
+    {:exsync, "~> 0.4", only: :dev},
   ]
 end
 ```
