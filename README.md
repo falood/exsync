@@ -54,6 +54,14 @@ For example, to watch `.js` and `.css` files add this to your `config.exs`:
 config :exsync, extra_extensions: [".js", ".css"]
 ```
 
+`:exclusions` - List of regular expressions that, if matched, exclude a file from being noticed by exsync.
+
+For example, to exclude Emacs temporary files:
+
+```elixir
+config :exsync, exclusions: [~r/#/]
+```
+
 `:logging_enabled` - Set to false to disable logging (default true)
 
 `:reload_callback` - A callback [MFA](https://codereviewvideos.com/blog/what-is-mfa-in-elixir/) that is called when a set of files are done reloading. Can be used to implement your own special handling to react to file reloads.

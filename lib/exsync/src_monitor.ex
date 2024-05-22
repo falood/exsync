@@ -37,8 +37,14 @@ defmodule ExSync.SrcMonitor do
     # isolation to trigger things.
     matching_event? = :modified in events
 
+    included? =
+      !Enum.any?(
+        ExSync.Config.src_exclusions(),
+        &Regex.match?(&1, path)
+      )
+
     state =
-      if matching_extension? && matching_event? do
+      if matching_extension? && matching_event? && included? do
         maybe_recomplete(state)
       else
         state

@@ -126,6 +126,14 @@ defmodule ExSync.Config do
     )
   end
 
+  def src_exclusions do
+    Application.get_env(
+      :exsync,
+      :exclusions,
+      Application.get_env(:exsync, :exclusions, [])
+    )
+  end
+
   def application do
     :exsync
   end
