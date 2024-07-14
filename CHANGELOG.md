@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## Unreleased
+
+Improvements
+* Add `:exclusions` configuration to exclude via regex (thanks to [Andy Kirkpatrick](https://github.com/spacebat)) [#62](https://github.com/falood/exsync/pull/62)
+
 ## [0.4.1] - 2024-05-05
 
 No longer refuse to start when run when `Mix.env() == :dev`
