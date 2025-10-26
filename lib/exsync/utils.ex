@@ -13,13 +13,13 @@ defmodule ExSync.Utils do
   end
 
   def unload(beam_path) do
-    beam_path |> Path.basename(".beam") |> String.to_atom() |> unload
+    beam_path |> Path.basename(".beam") |> String.to_atom() |> unload()
   end
 
   # beam file path
   def reload(beam_path) do
     ExSync.Logger.debug("reload module #{Path.basename(beam_path, ".beam")}")
-    file = beam_path |> to_charlist
+    file = beam_path |> to_charlist()
     {:ok, binary, _} = :erl_prim_loader.get_file(file)
     module = beam_path |> Path.basename(".beam") |> String.to_atom()
     :code.load_binary(module, file, binary)

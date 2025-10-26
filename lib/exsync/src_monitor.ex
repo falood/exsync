@@ -58,9 +58,9 @@ defmodule ExSync.SrcMonitor do
     {:noreply, state}
   end
 
-  def handle_info(:throttle_timer_complete, state) do
+  def handle_info(:throttle_timer_complete, %State{} = state) do
     ExSync.Utils.recomplete()
-    state = %State{state | throttle_timer: nil}
+    state = %{state | throttle_timer: nil}
     {:noreply, state}
   end
 

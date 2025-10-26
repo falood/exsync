@@ -22,9 +22,11 @@ jobs:
       matrix:
         include:
           - elixir: 1.13.1
-            otp: 24.2
+            otp: 24.3.4.17
           - elixir: 1.16.2
             otp: 26.2.5
+          - elixir: 1.19.1
+            otp: 28.1.1
 
     steps:
     - uses: actions/checkout@v4

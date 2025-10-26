@@ -99,7 +99,7 @@ defmodule ExSync.BeamMonitor do
   defp track_module_change(:reload_module, module, state) do
     %State{reload_set: reload_set, unload_set: unload_set} = state
 
-    %State{
+    %{
       state
       | reload_set: MapSet.put(reload_set, module),
         unload_set: MapSet.delete(unload_set, module)
@@ -109,7 +109,7 @@ defmodule ExSync.BeamMonitor do
   defp track_module_change(:unload_module, module, state) do
     %State{reload_set: reload_set, unload_set: unload_set} = state
 
-    %State{
+    %{
       state
       | reload_set: MapSet.delete(reload_set, module),
         unload_set: MapSet.put(unload_set, module)
