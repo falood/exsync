@@ -1,5 +1,3 @@
-require Logger
-
 defmodule ExSync.Application do
   def start(_, _) do
     children =
