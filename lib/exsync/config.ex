@@ -13,6 +13,10 @@ defmodule ExSync.Config do
     Application.get_env(application(), :reload_callback)
   end
 
+  def compile_callback do
+    Application.get_env(application(), :compile_callback)
+  end
+
   def beam_dirs do
     if Mix.Project.umbrella?() do
       for %Mix.Dep{app: app, opts: opts} <- Mix.Dep.Umbrella.loaded() do

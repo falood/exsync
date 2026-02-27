@@ -2,8 +2,14 @@ defmodule ExSync.Utils do
   def recomplete do
     ExSync.Logger.debug("running mix compile")
 
-    System.cmd("mix", ["compile"], cd: ExSync.Config.app_source_dir(), stderr_to_stdout: true)
-    |> log_compile_cmd()
+    result = System.cmd("mix", ["compile"], cd: ExSync.Config.app_source_dir(), stderr_to_stdout: true)
+
+    if callback = ExSync.Config.compile_callback() do
+      {mod, fun, args} = callback
+      apply(mod, fun, [result | args])
+    end
+
+    log_compile_cmd(result)
   end
 
   def unload(module) when is_atom(module) do
